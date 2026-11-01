@@ -1,0 +1,29 @@
+name: Vault Writer
+on:
+  repository_dispatch:
+    types: [write_note]
+permissions:
+  contents: write
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write or Append Markdown Note
+        env:
+          FILEPATH: ${{ github.event.client_payload.filepath }}
+          MODE: ${{ github.event.client_payload.mode }}
+          CONTENT: ${{ github.event.client_payload.content }}
+          COMMIT_MSG: ${{ github.event.client_payload.commit_message }}
+        run: |
+          mkdir -p "$(dirname "$FILEPATH")"
+          if [ "$MODE" = "append" ] && [ -f "$FILEPATH" ]; then
+            printf "\n%s\n" "$CONTENT" >> "$FILEPATH"
+          else
+            printf "%s\n" "$CONTENT" > "$FILEPATH"
+          fi
+          git config user.name "ChatGPT Vault Agent"
+          git config user.email "actions@github.com"
+          git add "$FILEPATH"
+          git commit -m "${COMMIT_MSG:-Update vault note via ChatGPT}" || exit 0
+          git push
