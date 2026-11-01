@@ -1,13 +1,19 @@
 ---
 type: moc
 domain: Computer Science
+parent: "[[_index]]"
+aliases: [Computer Science Map, CS MOC]
 status: active
-updated: 2026-10-31
+updated: 2026-11-01
 ---
 
 # Computer Science
 
+## Overview
+
 A hierarchical map of foundational topics and atomic notes.
+
+## Core Hierarchy & Subtopics
 
 - **Computer Science**
   - **Artificial Intelligence**
@@ -15,6 +21,11 @@ A hierarchical map of foundational topics and atomic notes.
       - **Computer Vision**
         - [[Image Segmentation]]
           - [[Otsu Thresholding]]
+            - [[Specular Glare in Image Thresholding]]
+
+## Cross-Domain Links
+
+- [[Project - Flux Reflow Detection]] — a project exploring image segmentation; the PCB solder-paste glare report has not been validated for this project.
 
 ## Navigation
 
